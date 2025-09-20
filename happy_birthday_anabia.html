@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Anabia</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      color: #fff;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    .gift {
+      margin-top: 20px;
+      font-size: 3rem;
+      cursor: pointer;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 10;
+    }
+    .popup.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .popup-content {
+      background: #fff;
+      color: #333;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      font-size: 1.3rem;
+      line-height: 1.6;
+    }
+    .sound-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
+      z-index: 20;
+      user-select: none;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p, .popup-content {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Happy Birthday Anabia 🎂</h1>
+    <p>Click the gift below for a surprise!</p>
+    <div class="gift">🎁</div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>💖 Happy Birthday, Anabia! 💖</h2>
+      <p>
+        Wishing you a day filled with endless joy, laughter, and love. May your heart be as bright as the candles on your cake, and may this year bring you nothing but happiness, success, and beautiful memories. 🎂✨<br><br>
+        On this special occasion, may every moment remind you of how cherished and loved you are, not just today but every single day. You truly deserve all the blessings and smiles in the world. 🌸🌟<br><br>
+        Here’s to new adventures, countless celebrations, and dreams that come true. May your life be surrounded by friends who care, family who supports you, and opportunities that take you even further than you imagine. 🥳💐
+      </p>
+    </div>
+  </div>
+
+  <div class="sound-toggle" id="soundToggle">🔊</div>
+
+  <!-- Local birthday music file -->
+  <audio id="birthdayTone" loop>
+    <source src="hbd.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const gift = document.querySelector('.gift');
+    const popup = document.getElementById('popup');
+    const soundToggle = document.getElementById('soundToggle');
+    const birthdayTone = document.getElementById('birthdayTone');
+    let isPlaying = false;
+
+    gift.addEventListener('click', () => {
+      popup.classList.add('active');
+    });
+
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.classList.remove('active');
+      }
+    });
+
+    soundToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        birthdayTone.pause();
+        soundToggle.textContent = '🔇';
+      } else {
+        birthdayTone.play();
+        soundToggle.textContent = '🔊';
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+</body>
+</html>
